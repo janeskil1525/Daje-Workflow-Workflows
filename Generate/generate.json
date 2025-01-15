@@ -37,12 +37,14 @@
 
         "pre_checks": [
           {
-            "check": ""
+            "name": "Mandatory fields",
+            "class": "Daje::Workflow::Checks::Mandatory",
+            "checks": "sql_path,perl_path,changed_files"
           }
         ],
         "activities": [
           {
-            "name": "Generate SQL",
+            "name": "generate_sql",
             "activity": "Daje::Workflow::GenerateSQL::Activity",
             "activity_data": {
               "template" : {
@@ -50,8 +52,8 @@
                 "source": "Daje::Generate::Templates::Sql"
               }
             },
-            "method": "changed_files",
-            "resulting_state": "",
+            "method": "process",
+            "resulting_state": "generatePerl",
             "pre_checks": [],
             "post_checks":[],
             "observers": []
@@ -62,8 +64,7 @@
             "check": ""
           }
         ]
-      },
-      "next_state": "DONE"
+      }
     }
   ]
 }
