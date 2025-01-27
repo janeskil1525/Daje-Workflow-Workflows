@@ -53,7 +53,75 @@
               }
             },
             "method": "process",
-            "resulting_state": "generatePerl",
+            "resulting_state": "saveSqlFile",
+            "pre_checks": [],
+            "post_checks":[],
+            "observers": []
+          }
+        ],
+        "post_checks": [
+          {
+            "check": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "saveSqlFile",
+      "auto": 1,
+      "state": {
+
+        "pre_checks": [
+          {
+            "name": "Mandatory fields",
+            "class": "Daje::Workflow::Checks::Mandatory",
+            "checks": "sql_path,perl_path,changed_files,sql"
+          }
+        ],
+        "activities": [
+          {
+            "name": "save_sql_file",
+            "activity": "Daje::Workflow::Savefile::Activity",
+            "activity_data": {
+              "file" : {
+                "target_dir_tag": "sql_target_dir",
+                "filetype": ".sql",
+                "file_list_tag": "sql"
+              }
+            },
+            "method": "save",
+            "resulting_state": "generateSchema",
+            "pre_checks": [],
+            "post_checks":[],
+            "observers": []
+          }
+        ],
+        "post_checks": [
+          {
+            "check": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "generateSchema",
+      "auto": 1,
+      "state": {
+
+        "pre_checks": [
+          {
+            "name": "Mandatory fields",
+            "class": "Daje::Workflow::Checks::Mandatory",
+            "checks": "sql_path,perl_path,changed_files,sql,dbconn"
+          }
+        ],
+        "activities": [
+          {
+            "name": "generate_schema",
+            "activity": "Daje::Workflow::GenerateSchema::Activity",
+            "activity_data": {},
+            "method": "process",
+            "resulting_state": "saveSchema",
             "pre_checks": [],
             "post_checks":[],
             "observers": []
