@@ -133,6 +133,80 @@
           }
         ]
       }
+    },
+    {
+      "name": "saveSchema",
+      "auto": 1,
+      "state": {
+
+        "pre_checks": [
+          {
+            "name": "Mandatory fields",
+            "class": "Daje::Workflow::Checks::Mandatory",
+            "checks": "sql_path,perl_path,changed_files,sql,schema"
+          }
+        ],
+        "activities": [
+          {
+            "name": "save_schema_file",
+            "activity": "Daje::Workflow::Savefile::Activity",
+            "activity_data": {
+              "file" : {
+                "target_dir_tag": "schema_dir",
+                "filetype": ".json",
+                "file_list_tag": "schema"
+              }
+            },
+            "method": "save",
+            "resulting_state": "generatePerl",
+            "pre_checks": [],
+            "post_checks":[],
+            "observers": []
+          }
+        ],
+        "post_checks": [
+          {
+            "check": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "generatePerl",
+      "auto": 1,
+      "state": {
+
+        "pre_checks": [
+          {
+            "name": "Mandatory fields",
+            "class": "Daje::Workflow::Checks::Mandatory",
+            "checks": "sql_path,perl_path,changed_files,sql,schema,perl"
+          }
+        ],
+        "activities": [
+          {
+            "name": "generate_perl",
+            "activity": "Daje::Workflow::GeneratePerl::Activity",
+            "activity_data": {
+              "file" : {
+                "target_dir_tag": "schema_dir",
+                "filetype": ".json",
+                "file_list_tag": "schema"
+              }
+            },
+            "method": "generate_classes",
+            "resulting_state": "savePerl",
+            "pre_checks": [],
+            "post_checks":[],
+            "observers": []
+          }
+        ],
+        "post_checks": [
+          {
+            "check": ""
+          }
+        ]
+      }
     }
   ]
 }
