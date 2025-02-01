@@ -119,7 +119,9 @@
           {
             "name": "generate_schema",
             "activity": "Daje::Workflow::GenerateSchema::Activity",
-            "activity_data": {},
+            "activity_data": {
+              "excludes": "mojo_migrations"
+            },
             "method": "process",
             "resulting_state": "saveSchema",
             "pre_checks": [],
@@ -192,6 +194,10 @@
                 "target_dir_tag": "schema_dir",
                 "filetype": ".json",
                 "file_list_tag": "schema"
+              },
+              "template" : {
+                "data_sections": "class,method,baseclass,interface,load_from_pkey,load_from_fkey,load_list,insert_data,update_data,fields_method",
+                "source": "Daje::Generate::Templates::Perl"
               }
             },
             "method": "generate_classes",
@@ -207,7 +213,43 @@
           }
         ]
       }
+    },
+    {
+      "name": "savePerl",
+      "auto": 1,
+      "state": {
+
+        "pre_checks": [
+          {
+            "name": "Mandatory fields",
+            "class": "Daje::Workflow::Checks::Mandatory",
+            "checks": "perlfiles"
+          }
+        ],
+        "activities": [
+          {
+            "name": "save_perl_file",
+            "activity": "Daje::Workflow::Savefile::Activity",
+            "activity_data": {
+              "file" : {
+                "file_list_tag": "perlfiles"
+              }
+            },
+            "method": "save",
+            "resulting_state": "generatePerl",
+            "pre_checks": [],
+            "post_checks":[],
+            "observers": []
+          }
+        ],
+        "post_checks": [
+          {
+            "check": ""
+          }
+        ]
+      }
     }
+
   ]
 }
 
