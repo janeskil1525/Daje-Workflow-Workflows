@@ -48,7 +48,7 @@
             "activity": "Daje::Workflow::GenerateSQL::Activity",
             "activity_data": {
               "template" : {
-                "data_sections": "table,foreign_key,index,section,file",
+                "data_sections": "table,foreign_key,index,section,file,view",
                 "source": "Daje::Generate::Templates::Sql"
               }
             },
@@ -236,7 +236,48 @@
               }
             },
             "method": "save",
-            "resulting_state": "generatePerl",
+            "resulting_state": "generateAngular",
+            "pre_checks": [],
+            "post_checks":[],
+            "observers": []
+          }
+        ],
+        "post_checks": [
+          {
+            "check": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "generateAngular",
+      "auto": 1,
+      "state": {
+
+        "pre_checks": [
+          {
+            "name": "Mandatory fields",
+            "class": "Daje::Workflow::Checks::Mandatory",
+            "checks": "sql_path,perl_path,changed_files,sql,schema,perl,perlfiles"
+          }
+        ],
+        "activities": [
+          {
+            "name": "generate_angular",
+            "activity": "Daje::Workflow::GenerateAngular::Activity",
+            "activity_data": {
+              "file" : {
+                "target_dir_tag": "schema_dir",
+                "filetype": ".json",
+                "file_list_tag": "schema"
+              },
+              "template" : {
+                "data_sections": "",
+                "source": "Daje::Generate::Templates::Angular"
+              }
+            },
+            "method": "generate_classes",
+            "resulting_state": "savePerl",
             "pre_checks": [],
             "post_checks":[],
             "observers": []
