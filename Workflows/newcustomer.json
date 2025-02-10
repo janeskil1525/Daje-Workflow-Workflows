@@ -1,0 +1,34 @@
+{
+  "workflow": [
+    {
+      "name": "INITIAL",
+      "auto": 0,
+      "state": {
+        "pre_checks": [
+          {
+            "name":"Mandatory fields",
+            "class": "Daje::Workflow::Checks::Mandatory",
+            "checks": ""
+          }
+        ],
+        "activities": [
+          {
+            "name": "new",
+            "activity": "Daje::Workflow::FileChanged::Activity",
+            "method": "changed_files",
+            "resulting_state": "generateSql",
+            "pre_checks": [],
+            "post_checks":[],
+            "observers": []
+          }
+        ],
+        "post_checks": [
+
+        ],
+        "observers": [
+
+        ]
+      }
+    }
+  ]
+}
