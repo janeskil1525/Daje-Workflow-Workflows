@@ -48,7 +48,7 @@
             "activity": "Daje::Workflow::GenerateSQL::Activity",
             "activity_data": {
               "template" : {
-                "data_sections": "table,foreign_key,index,section,file,view",
+                "data_sections": "table,foreign_key,index,section,file,view,insert",
                 "source": "Daje::Generate::Templates::Sql"
               }
             },

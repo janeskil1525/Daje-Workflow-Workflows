@@ -8,15 +8,15 @@
           {
             "name":"Mandatory fields",
             "class": "Daje::Workflow::Checks::Mandatory",
-            "checks": ""
+            "checks": "userid,username,password,name,company_type"
           }
         ],
         "activities": [
           {
-            "name": "new",
-            "activity": "Daje::Workflow::FileChanged::Activity",
-            "method": "changed_files",
-            "resulting_state": "generateSql",
+            "name": "new_client",
+            "activity": "Daje::Workflow::Client::Activity",
+            "method": "create_client",
+            "resulting_state": "send_mail",
             "pre_checks": [],
             "post_checks":[],
             "observers": []
