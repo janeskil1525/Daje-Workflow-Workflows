@@ -8,15 +8,15 @@
           {
             "name":"Mandatory fields",
             "class": "Daje::Workflow::Checks::Mandatory",
-            "checks": "company,user"
+            "checks": "company_type_fkey,name,workflow_fkey"
           }
         ],
         "activities": [
           {
-            "name": "new_client",
-            "activity": "Daje::Workflow::Client::Activity",
-            "method": "create_client",
-            "resulting_state": "closed",
+            "name": "new_company",
+            "activity": "Daje::Workflow::Company::Activity",
+            "method": "create_company",
+            "resulting_state": "company_active",
             "pre_checks": [],
             "post_checks":[],
             "observers": []
@@ -31,16 +31,16 @@
       }
     },
     {
-      "name": "closed",
+      "name": "company_active",
       "auto": 0,
       "state": {
         "pre_checks": [],
         "activities": [
           {
-            "name": "closed",
-            "activity": "Daje::Workflow::Activities::Closed",
-            "method": "closed",
-            "resulting_state": "closed",
+            "name": "update_company",
+            "activity": "Daje::Workflow::Company::Activity",
+            "method": "send_mail",
+            "resulting_state": "company_active",
             "pre_checks": [],
             "post_checks":[],
             "observers": []

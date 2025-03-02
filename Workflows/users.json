@@ -1,0 +1,187 @@
+{
+  "workflow": [
+    {
+      "name": "INITIAL",
+      "auto": 0,
+      "state": {
+        "pre_checks": [
+          {
+            "name":"Mandatory fields",
+            "class": "Daje::Workflow::Checks::Mandatory",
+            "checks": "userid,username,workflow_fkey"
+          }
+        ],
+        "activities": [
+          {
+            "name": "new_user",
+            "activity": "Daje::Workflow::User::Activity",
+            "method": "create_user",
+            "resulting_state": "confirmationMail",
+            "pre_checks": [],
+            "post_checks":[],
+            "observers": []
+          }
+        ],
+        "post_checks": [
+
+        ],
+        "observers": [
+
+        ]
+      }
+    },
+    {
+      "name": "confirmationMail",
+      "auto": 0,
+      "state": {
+        "pre_checks": [
+          {
+            "name":"Mandatory fields",
+            "class": "Daje::Workflow::Checks::Mandatory",
+            "checks": "mail.to"
+          }
+        ],
+        "activities": [
+          {
+            "name": "confirmation_email",
+            "activity": "Daje::Workflow::Email::Activity",
+            "activity_data": {
+              "template": "EmailConfirmation"
+            },
+            "method": "send_mail",
+            "resulting_state": "awaitingConfirmation",
+            "pre_checks": [],
+            "post_checks":[],
+            "observers": []
+          }
+        ],
+        "post_checks": [
+
+        ],
+        "observers": [
+
+        ]
+      }
+    },
+    {
+      "name": "awaitingConfirmation",
+      "auto": 0,
+      "state": {
+        "pre_checks": [
+          {
+            "name":"Mandatory fields",
+            "class": "Daje::Workflow::Checks::Mandatory",
+            "checks": "users_pkey"
+          }
+        ],
+        "activities": [
+          {
+            "name": "confirmed",
+            "activity": "Daje::Workflow::User::Activity",
+            "method": "confirm_user",
+            "resulting_state": "user_active",
+            "pre_checks": [],
+            "post_checks":[],
+            "observers": []
+          }
+        ],
+        "post_checks": [
+
+        ],
+        "observers": [
+
+        ]
+      }
+    },
+    {
+    "name": "user_active",
+    "auto": 0,
+    "state": {
+      "pre_checks": [
+        {
+          "name":"Mandatory fields",
+          "class": "Daje::Workflow::Checks::Mandatory",
+          "checks": "users_pkey"
+        }
+      ],
+      "activities": [
+        {
+          "name": "update_user",
+          "activity": "Daje::Workflow::User::Activity",
+          "activity_data": {
+            "template": "EmailConfirmation"
+          },
+          "method": "update_user",
+          "resulting_state": "user_active",
+          "pre_checks": [],
+          "post_checks":[],
+          "observers": []
+        },
+        {
+          "name": "inactivate_user",
+          "activity": "Daje::Workflow::User::Activity",
+          "activity_data": {
+            "template": "EmailConfirmation"
+          },
+          "method": "inactivate_user",
+          "resulting_state": "user_inactive",
+          "pre_checks": [],
+          "post_checks":[],
+          "observers": []
+        },
+        {
+          "name": "change_password",
+          "activity": "Daje::Workflow::User::Activity",
+          "activity_data": {
+            "template": "EmailConfirmation"
+          },
+          "method": "change_password",
+          "resulting_state": "user_active",
+          "pre_checks": [],
+          "post_checks":[],
+          "observers": []
+        }
+      ],
+      "post_checks": [
+
+      ],
+      "observers": [
+
+      ]
+    }
+    },
+    {
+      "name": "user_inactive",
+      "auto": 0,
+      "state": {
+        "pre_checks": [
+          {
+            "name":"Mandatory fields",
+            "class": "Daje::Workflow::Checks::Mandatory",
+            "checks": "users_pkey"
+          }
+        ],
+        "activities": [
+          {
+            "name": "activate_user",
+            "activity": "Daje::Workflow::User::Activity",
+            "activity_data": {
+              "template": "EmailConfirmation"
+            },
+            "method": "activate_user",
+            "resulting_state": "user_active",
+            "pre_checks": [],
+            "post_checks":[],
+            "observers": []
+          }
+        ],
+        "post_checks": [
+
+        ],
+        "observers": [
+
+        ]
+      }
+    }
+  ]
+}
