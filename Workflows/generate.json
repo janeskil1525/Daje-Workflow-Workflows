@@ -196,7 +196,7 @@
                 "file_list_tag": "schema"
               },
               "template" : {
-                "data_sections": "class,method,baseclass,interface,load_from_pkey,load_from_fkey,load_list,insert_data,update_data,fields_method,view_list_interface,view_list_class,view_fields_method",
+                "data_sections": "class,method,baseclass,interface,load_from_pkey,load_from_fkey,load_list,insert_data,update_data,fields_method,view_list_interface,view_list_class,view_fields_method,select_from_index",
                 "source": "Daje::Generate::Templates::Perl"
               }
             },

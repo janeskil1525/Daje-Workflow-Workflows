@@ -1,0 +1,36 @@
+{
+  "workflow": [
+    {
+      "name": "INITIAL",
+      "auto": 1,
+      "state": {
+        "pre_checks": [
+          {
+            "name": "Mandatory fields",
+            "class": "Daje::Workflow::Checks::Mandatory",
+            "checks": "template"
+          }
+        ],
+        "activities": [
+          {
+            "name": "build_document",
+            "activity": "Daje::Workflow::Document::Builder::Activity",
+            "activity_data": {
+
+            },
+            "method": "process",
+            "resulting_state": "saveDocument",
+            "pre_checks": [],
+            "post_checks":[],
+            "observers": []
+          }
+        ],
+        "post_checks": [
+          {
+            "check": ""
+          }
+        ]
+      }
+    }
+  ]
+}
