@@ -1,0 +1,68 @@
+{
+  "workflow": [
+    {
+      "name": "INITIAL",
+      "auto": 1,
+      "state": {
+        "pre_checks": [
+          {
+            "name": "Mandatory fields",
+            "class": "Daje::Workflow::Checks::Mandatory",
+            "checks": "name,state"
+          }
+        ],
+        "activities": [
+          {
+            "name": "save_new_project",
+            "activity": "Daje::Workflow::Activity::Tools::Project",
+            "activity_data": {
+
+            },
+            "method": "new_project",
+            "resulting_state": "OPEN",
+            "pre_checks": [],
+            "post_checks":[],
+            "observers": []
+          }
+        ],
+        "post_checks": [
+          {
+            "check": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "OPEN",
+      "auto": 1,
+      "state": {
+        "pre_checks": [
+          {
+            "name": "Mandatory fields",
+            "class": "Daje::Workflow::Checks::Mandatory",
+            "checks": "name,type,active"
+          }
+        ],
+        "activities": [
+          {
+            "name": "save_new_object",
+            "activity": "Daje::Workflow::Activity::Tools::Objects",
+            "activity_data": {
+
+            },
+            "method": "new_object",
+            "resulting_state": "OPEN",
+            "pre_checks": [],
+            "post_checks":[],
+            "observers": []
+          }
+        ],
+        "post_checks": [
+          {
+            "check": ""
+          }
+        ]
+      }
+    }
+  ]
+}
