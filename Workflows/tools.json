@@ -50,7 +50,7 @@
             "activity_data": {
 
             },
-            "method": "new_object",
+            "method": "save_object",
             "resulting_state": "OPEN",
             "pre_checks": [],
             "post_checks":[],
