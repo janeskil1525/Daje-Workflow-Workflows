@@ -63,6 +63,38 @@
           }
         ]
       }
+    },
+    {
+      "name": "OPEN",
+      "auto": 1,
+      "state": {
+        "pre_checks": [
+          {
+            "name": "Mandatory fields",
+            "class": "Daje::Workflow::Checks::Mandatory",
+            "checks": "tools_version_fkey,tools_objects_fkey,fieldname,length,scale,active,visible,tools_objects_tables_datatypes_fkey,"
+          }
+        ],
+        "activities": [
+          {
+            "name": "save_new_table_object",
+            "activity": "Daje::Workflow::Activity::Tools::ObjectsTable",
+            "activity_data": {
+
+            },
+            "method": "save_object_table",
+            "resulting_state": "OPEN",
+            "pre_checks": [],
+            "post_checks":[],
+            "observers": []
+          }
+        ],
+        "post_checks": [
+          {
+            "check": ""
+          }
+        ]
+      }
     }
   ]
 }
