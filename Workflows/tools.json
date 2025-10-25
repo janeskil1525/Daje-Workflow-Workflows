@@ -36,55 +36,85 @@
       "name": "OPEN",
       "auto": 1,
       "state": {
-        "pre_checks": [
-          {
-            "name": "Mandatory fields",
-            "class": "Daje::Workflow::Checks::Mandatory",
-            "checks": "name,type,active"
-          }
-        ],
+        "pre_checks": [],
         "activities": [
           {
             "name": "save_new_object",
-            "activity": "Daje::Workflow::Activity::Tools::Objects",
+            "activity": "Daje::Workflow::Activities::Save",
             "activity_data": {
-
+              "class": "Daje::Database::Model::ToolsObjects",
+              "update": "update_tools_objects",
+              "insert": "insert_tools_objects"
             },
-            "method": "save_object",
+            "method": "save",
             "resulting_state": "OPEN",
-            "pre_checks": [],
+            "pre_checks": [
+              {
+                "name": "Mandatory fields",
+                "class": "Daje::Workflow::Checks::Mandatory",
+                "checks": "name,tools_object_types_fkey,active"
+              }
+            ],
             "post_checks":[],
             "observers": []
-          }
-        ],
-        "post_checks": [
-          {
-            "check": ""
-          }
-        ]
-      }
-    },
-    {
-      "name": "OPEN",
-      "auto": 1,
-      "state": {
-        "pre_checks": [
-          {
-            "name": "Mandatory fields",
-            "class": "Daje::Workflow::Checks::Mandatory",
-            "checks": "tools_version_fkey,tools_objects_fkey,fieldname,length,scale,active,visible,tools_objects_tables_datatypes_fkey,"
-          }
-        ],
-        "activities": [
+          },
           {
             "name": "save_new_table_object",
-            "activity": "Daje::Workflow::Activity::Tools::ObjectsTable",
+            "activity": "Daje::Workflow::Activities::Save",
             "activity_data": {
-
+              "class": "Daje::Database::Model::ToolsObjectsTables",
+              "update": "update_tools_objects_tables",
+              "insert": "insert_tools_objects_tables"
             },
-            "method": "save_object_table",
+            "method": "save",
             "resulting_state": "OPEN",
-            "pre_checks": [],
+            "pre_checks": [
+              {
+                "name": "Mandatory fields",
+                "class": "Daje::Workflow::Checks::Mandatory",
+                "checks": "tools_version_fkey,tools_objects_fkey,fieldname,length,scale,active,visible,tools_objects_tables_datatypes_fkey,"
+              }
+            ],
+            "post_checks":[],
+            "observers": []
+          },
+          {
+            "name": "save_new_table_object_index",
+            "activity": "Daje::Workflow::Activities::Save",
+            "activity_data": {
+              "class": "Daje::Database::Model::ToolsObjectIndex",
+              "update": "update_tools_objects_index",
+              "insert": "insert_tools_objects_index"
+            },
+            "method": "save",
+            "resulting_state": "OPEN",
+            "pre_checks": [
+              {
+                "name": "Mandatory fields",
+                "class": "Daje::Workflow::Checks::Mandatory",
+                "checks": "tools_version_fkey,tools_objects_fkey,table_name,fields,index_unique"
+              }
+            ],
+            "post_checks":[],
+            "observers": []
+          },
+          {
+            "name": "save_object_sql",
+            "activity": "Daje::Workflow::Activities::Save",
+            "activity_data": {
+              "class": "Daje::Database::Model::ToolsObjectSQL",
+              "update": "update_tools_objects_sql",
+              "insert": "insert_tools_objects_sql"
+            },
+            "method": "save",
+            "resulting_state": "OPEN",
+            "pre_checks": [
+              {
+                "name": "Mandatory fields",
+                "class": "Daje::Workflow::Checks::Mandatory",
+                "checks": "tools_version_fkey,tools_objects_fkey,sql_string"
+              }
+            ],
             "post_checks":[],
             "observers": []
           }
