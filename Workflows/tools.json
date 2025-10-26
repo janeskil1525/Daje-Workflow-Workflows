@@ -39,12 +39,10 @@
         "pre_checks": [],
         "activities": [
           {
-            "name": "save_new_object",
+            "name": "save_object",
             "activity": "Daje::Workflow::Activities::Save",
             "activity_data": {
-              "class": "Daje::Database::Model::ToolsObjects",
-              "update": "update_tools_objects",
-              "insert": "insert_tools_objects"
+              "class": "Daje::Database::Model::ToolsObjects"
             },
             "method": "save",
             "resulting_state": "OPEN",
@@ -59,12 +57,10 @@
             "observers": []
           },
           {
-            "name": "save_new_table_object",
+            "name": "save_object_table",
             "activity": "Daje::Workflow::Activities::Save",
             "activity_data": {
-              "class": "Daje::Database::Model::ToolsObjectsTables",
-              "update": "update_tools_objects_tables",
-              "insert": "insert_tools_objects_tables"
+              "class": "Daje::Database::Model::ToolsObjectsTables"
             },
             "method": "save",
             "resulting_state": "OPEN",
@@ -79,12 +75,10 @@
             "observers": []
           },
           {
-            "name": "save_new_table_object_index",
+            "name": "save_object_index",
             "activity": "Daje::Workflow::Activities::Save",
             "activity_data": {
-              "class": "Daje::Database::Model::ToolsObjectIndex",
-              "update": "update_tools_objects_index",
-              "insert": "insert_tools_objects_index"
+              "class": "Daje::Database::Model::ToolsObjectIndex"
             },
             "method": "save",
             "resulting_state": "OPEN",
@@ -102,9 +96,7 @@
             "name": "save_object_sql",
             "activity": "Daje::Workflow::Activities::Save",
             "activity_data": {
-              "class": "Daje::Database::Model::ToolsObjectSQL",
-              "update": "update_tools_objects_sql",
-              "insert": "insert_tools_objects_sql"
+              "class": "Daje::Database::Model::ToolsObjectSQL"
             },
             "method": "save",
             "resulting_state": "OPEN",
