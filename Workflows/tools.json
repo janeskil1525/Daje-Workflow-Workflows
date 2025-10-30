@@ -109,6 +109,24 @@
             ],
             "post_checks":[],
             "observers": []
+          },
+          {
+            "name": "save_object_view",
+            "activity": "Daje::Workflow::Activities::Save",
+            "activity_data": {
+              "class": "Daje::Database::Model::ToolsObjectSQL"
+            },
+            "method": "save",
+            "resulting_state": "OPEN",
+            "pre_checks": [
+              {
+                "name": "Mandatory fields",
+                "class": "Daje::Workflow::Checks::Mandatory",
+                "checks": "tools_version_fkey,tools_objects_fkey,name,fields,conditions"
+              }
+            ],
+            "post_checks":[],
+            "observers": []
           }
         ],
         "post_checks": [
