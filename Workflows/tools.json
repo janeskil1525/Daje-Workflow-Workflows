@@ -127,6 +127,24 @@
             ],
             "post_checks":[],
             "observers": []
+          },
+          {
+            "name": "save_parameter_value",
+            "activity": "Daje::Workflow::Activities::Save",
+            "activity_data": {
+              "class": "Daje::Database::Model::ToolsParameterValues"
+            },
+            "method": "save",
+            "resulting_state": "OPEN",
+            "pre_checks": [
+              {
+                "name": "Mandatory fields",
+                "class": "Daje::Workflow::Checks::Mandatory",
+                "checks": "tools_projects_fkey,tools_parameters_fkey,value,description,active"
+              }
+            ],
+            "post_checks":[],
+            "observers": []
           }
         ],
         "post_checks": [
