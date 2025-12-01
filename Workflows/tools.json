@@ -14,7 +14,7 @@
         "activities": [
           {
             "name": "save_new_project",
-            "activity": "Daje::Workflow::Activity::Tools::Project",
+            "activity": "Daje::Workflow::Activities::Tools::Project",
             "activity_data": {
 
             },
