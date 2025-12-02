@@ -1,0 +1,42 @@
+{
+  "workflow": [
+    {
+      "name": "INITIAL",
+      "auto": 1,
+      "state": {
+        "pre_checks": [
+          {
+            "name": "Mandatory fields",
+            "class": "Daje::Workflow::Checks::Mandatory",
+            "checks": "name,state"
+          }
+        ],
+        "activities": [
+          {
+            "name": "generate_sql",
+            "activity": "Daje::Workflow::Activities::Tools::Generate::SQL",
+            "activity_data": {
+              "template":{
+                "source": "Daje::Document::Templates::Tools::Generate::SQL",
+                "data_sections": "sql"
+              }
+            },
+            "method": "generate_sql",
+            "resulting_state": "CREATE_FILES",
+            "pre_checks": [],
+            "post_checks": [],
+            "observers": [],
+            "auto": {
+              "activity": "create_files"
+            }
+          }
+        ],
+        "post_checks": [
+          {
+            "check": ""
+          }
+        ]
+      }
+    }
+  ]
+}
