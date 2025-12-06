@@ -37,6 +37,43 @@
           }
         ]
       }
+    },
+    {
+      "name": "CREATE_FILES",
+      "auto": 1,
+      "state": {
+        "pre_checks": [
+          {
+            "name": "Mandatory fields",
+            "class": "Daje::Workflow::Checks::Mandatory",
+            "checks": "sql_path"
+          }
+        ],
+        "activities": [
+          {
+            "name": "save_sql_files",
+            "activity": "Daje::Workflow::Activities::Files::Save",
+            "activity_data": {
+              "file" : {
+                "target_dir_tag": "sql_dir",
+                "filetype": ".sql",
+                "file_list_tag": "sql",
+                "path": 1
+              }
+            },
+            "method": "save",
+            "resulting_state": "generatePerl",
+            "pre_checks": [],
+            "post_checks":[],
+            "observers": []
+          }
+        ],
+        "post_checks": [
+          {
+            "check": ""
+          }
+        ]
+      }
     }
   ]
 }
