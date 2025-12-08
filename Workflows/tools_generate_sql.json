@@ -5,11 +5,7 @@
       "auto": 1,
       "state": {
         "pre_checks": [
-          {
-            "name": "Mandatory fields",
-            "class": "Daje::Workflow::Checks::Mandatory",
-            "checks": "name,state"
-          }
+
         ],
         "activities": [
           {
@@ -23,11 +19,17 @@
             },
             "method": "generate_sql",
             "resulting_state": "CREATE_FILES",
-            "pre_checks": [],
+            "pre_checks": [
+              {
+                "name": "Mandatory fields",
+                "class": "Daje::Workflow::Checks::Mandatory",
+                "checks": "tools_projects_fkey,locked"
+              }
+            ],
             "post_checks": [],
             "observers": [],
             "auto": {
-              "activity": "create_files"
+              "activity": "save_sql_files"
             }
           }
         ],
@@ -43,11 +45,7 @@
       "auto": 1,
       "state": {
         "pre_checks": [
-          {
-            "name": "Mandatory fields",
-            "class": "Daje::Workflow::Checks::Mandatory",
-            "checks": "sql_path"
-          }
+
         ],
         "activities": [
           {
@@ -63,7 +61,13 @@
             },
             "method": "save",
             "resulting_state": "generatePerl",
-            "pre_checks": [],
+            "pre_checks": [
+              {
+                "name": "Mandatory fields",
+                "class": "Daje::Workflow::Checks::Mandatory",
+                "checks": "sql_path"
+              }
+            ],
             "post_checks":[],
             "observers": []
           }
