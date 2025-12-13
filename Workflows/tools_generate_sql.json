@@ -65,10 +65,14 @@
               {
                 "name": "Mandatory fields",
                 "class": "Daje::Workflow::Checks::Mandatory",
-                "checks": "sql_path"
+                "checks": "sql"
               }
             ],
-            "post_checks":[],
+            "post_checks":[
+              {
+                "check": ""
+              }
+            ],
             "observers": []
           }
         ],
