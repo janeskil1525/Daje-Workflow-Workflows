@@ -114,7 +114,7 @@
             "name": "save_object_view",
             "activity": "Daje::Workflow::Activities::Save",
             "activity_data": {
-              "class": "Daje::Database::Model::ToolsObjectSQL"
+              "class": "Daje::Database::Model::ToolsObjectViews"
             },
             "method": "save",
             "resulting_state": "OPEN",
