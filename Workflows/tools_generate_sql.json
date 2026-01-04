@@ -18,7 +18,7 @@
               }
             },
             "method": "generate_sql",
-            "resulting_state": "CREATE_FILES",
+            "resulting_state": "CREATE_SQL_FILES",
             "pre_checks": [
               {
                 "name": "Mandatory fields",
@@ -41,7 +41,7 @@
       }
     },
     {
-      "name": "CREATE_FILES",
+      "name": "CREATE_SQL_FILES",
       "auto": 1,
       "state": {
         "pre_checks": [
@@ -60,7 +60,7 @@
               }
             },
             "method": "save",
-            "resulting_state": "generatePerl",
+            "resulting_state": "GENERATE_PERL",
             "pre_checks": [
               {
                 "name": "Mandatory fields",
@@ -68,6 +68,212 @@
                 "checks": "sql"
               }
             ],
+            "post_checks":[
+              {
+                "check": ""
+              }
+            ],
+            "observers": [],
+            "auto": {
+              "activity": "generate_perl"
+            }
+          }
+        ],
+        "post_checks": [
+          {
+            "check": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "GENERATE_PERL",
+      "auto": 1,
+      "state": {
+        "pre_checks": [
+        ],
+        "activities": [
+          {
+            "name": "generate_perl",
+            "activity": "Daje::Workflow::Activities::Tools::Generate::Perl",
+            "activity_data": {
+            },
+            "method": "generate_perl",
+            "resulting_state": "CREATE_PERL_FILES",
+            "pre_checks": [
+              {
+                "name": "Mandatory fields",
+                "class": "Daje::Workflow::Checks::Mandatory",
+                "checks": "tools_projects_fkey"
+              }
+            ],
+            "post_checks": [
+              {
+                "check": ""
+              }
+            ],
+            "observers": [],
+            "auto": {
+              "activity": "save_perl_files"
+            }
+          }
+        ],
+        "post_checks": [
+          {
+            "check": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "CREATE_PERL_FILES",
+      "auto": 1,
+      "state": {
+        "pre_checks": [
+
+        ],
+        "activities": [
+          {
+            "name": "save_perl_files",
+            "activity": "Daje::Workflow::Activities::Files::Save",
+            "activity_data": {
+              "file" : {
+                "target_dir_tag": "perl_dir",
+                "filetype": ".pm",
+                "file_list_tag": "perl",
+                "path": 1
+              }
+            },
+            "method": "save",
+            "resulting_state": "GENERATE_ANGULAR",
+            "pre_checks": [
+              {
+                "name": "Mandatory fields",
+                "class": "Daje::Workflow::Checks::Mandatory",
+                "checks": "perl"
+              }
+            ],
+            "post_checks":[
+              {
+                "check": ""
+              }
+            ],
+            "observers": [],
+            "auto": {
+              "activity": "generate_angular"
+            }
+          }
+        ],
+        "post_checks": [
+          {
+            "check": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "GENERATE_ANGULAR",
+      "auto": 1,
+      "state": {
+        "pre_checks": [
+        ],
+        "activities": [
+          {
+            "name": "generate_angular",
+            "activity": "Daje::Workflow::Activities::Tools::Generate::Angular",
+            "activity_data": {
+            },
+            "method": "generate_angular",
+            "resulting_state": "CREATE_ANGULAR_FILES",
+            "pre_checks": [
+              {
+                "name": "Mandatory fields",
+                "class": "Daje::Workflow::Checks::Mandatory",
+                "checks": "tools_projects_fkey"
+              }
+            ],
+            "post_checks": [
+              {
+                "check": ""
+              }
+            ],
+            "observers": [],
+            "auto": {
+              "activity": "save_angular_files"
+            }
+          }
+        ],
+        "post_checks": [
+          {
+            "check": ""
+          }
+        ]
+      }
+    },{
+      "name": "CREATE_ANGULAR_FILES",
+      "auto": 1,
+      "state": {
+        "pre_checks": [
+
+        ],
+        "activities": [
+          {
+            "name": "save_angular_files",
+            "activity": "Daje::Workflow::Activities::Files::Save",
+            "activity_data": {
+              "file" : {
+                "target_dir_tag": "angular_dir",
+                "filetype": ".ts",
+                "file_list_tag": "angular",
+                "path": 1
+              }
+            },
+            "method": "save",
+            "resulting_state": "RUN_AUTOPOD",
+            "pre_checks": [
+              {
+                "name": "Mandatory fields",
+                "class": "Daje::Workflow::Checks::Mandatory",
+                "checks": "angular"
+              }
+            ],
+            "post_checks":[
+              {
+                "check": ""
+              }
+            ],
+            "observers": [],
+            "auto": {
+              "activity": "run_autopod"
+            }
+          }
+        ],
+        "post_checks": [
+          {
+            "check": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "RUN_AUTOPOD",
+      "auto": 1,
+      "state": {
+        "pre_checks": [
+
+        ],
+        "activities": [
+          {
+            "name": "run_autopod",
+            "activity": "Daje::Workflow::Activities::Process::Run",
+            "activity_data": {
+              "process" : {
+                "program": "/home/jan/perl5/perlbrew/perls/perl-5.42.0/bin/autopod -d /home/jan/Project/Daje-Plugin-Sentinel/lib"
+              }
+            },
+            "method": "execute",
+            "resulting_state": "DONE",
+            "pre_checks": [],
             "post_checks":[
               {
                 "check": ""
