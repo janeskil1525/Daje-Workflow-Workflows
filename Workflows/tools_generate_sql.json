@@ -209,7 +209,8 @@
           }
         ]
       }
-    },{
+    },
+    {
       "name": "CREATE_ANGULAR_FILES",
       "auto": 1,
       "state": {
@@ -229,12 +230,96 @@
               }
             },
             "method": "save",
-            "resulting_state": "RUN_AUTOPOD",
+            "resulting_state": "CREATE_WORKFLOW_FILES",
             "pre_checks": [
               {
                 "name": "Mandatory fields",
                 "class": "Daje::Workflow::Checks::Mandatory",
                 "checks": "angular"
+              }
+            ],
+            "post_checks":[
+              {
+                "check": ""
+              }
+            ],
+            "observers": [],
+            "auto": {
+              "activity": "generate_workflow"
+            }
+          }
+        ],
+        "post_checks": [
+          {
+            "check": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "CREATE_WORKFLOW_FILES",
+      "auto": 1,
+      "state": {
+        "pre_checks": [
+        ],
+        "activities": [
+          {
+            "name": "generate_workflow",
+            "activity": "Daje::Workflow::Activities::Tools::Generate::Workflow",
+            "activity_data": {
+            },
+            "method": "generate_workflow",
+            "resulting_state": "SAVE_WORKFLOW_FILES",
+            "pre_checks": [
+              {
+                "name": "Mandatory fields",
+                "class": "Daje::Workflow::Checks::Mandatory",
+                "checks": "tools_projects_fkey"
+              }
+            ],
+            "post_checks": [
+              {
+                "check": ""
+              }
+            ],
+            "observers": [],
+            "auto": {
+              "activity": "save_workflow_files"
+            }
+          }
+        ],
+        "post_checks": [
+          {
+            "check": ""
+          }
+        ]
+      }
+    },{
+      "name": "SAVE_WORKFLOW_FILES",
+      "auto": 1,
+      "state": {
+        "pre_checks": [
+
+        ],
+        "activities": [
+          {
+            "name": "save_workflow_files",
+            "activity": "Daje::Workflow::Activities::Files::Save",
+            "activity_data": {
+              "file" : {
+                "target_dir_tag": "workflow_dir",
+                "filetype": ".json",
+                "file_list_tag": "workflows",
+                "path": 1
+              }
+            },
+            "method": "save",
+            "resulting_state": "RUN_AUTOPOD",
+            "pre_checks": [
+              {
+                "name": "Mandatory fields",
+                "class": "Daje::Workflow::Checks::Mandatory",
+                "checks": "workflows"
               }
             ],
             "post_checks":[
