@@ -357,6 +357,41 @@
               }
             },
             "method": "execute",
+            "resulting_state": "SAVE_CODE",
+            "pre_checks": [],
+            "post_checks":[
+              {
+                "check": ""
+              }
+            ],
+            "observers": [],
+            "auto": {
+              "activity": "save_code"
+            }
+          }
+        ],
+        "post_checks": [
+          {
+            "check": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "SAVE_CODE",
+      "auto": 1,
+      "state": {
+        "pre_checks": [
+
+        ],
+        "activities": [
+          {
+            "name": "save_code",
+            "activity": "Daje::Workflow::Activities::Process::SaveCode",
+            "activity_data": {
+              "tags" : "perl,angular"
+            },
+            "method": "execute",
             "resulting_state": "DONE",
             "pre_checks": [],
             "post_checks":[
