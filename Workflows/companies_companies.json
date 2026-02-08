@@ -1,0 +1,107 @@
+{
+  "workflow": [
+    {
+      "name": "INITIAL",
+      "auto": 1,
+      "state": {
+        "pre_checks": [
+
+        ],
+        "activities": [
+          {
+            "name": "save_new_companies_companies",
+            "activity": "Daje::Workflow::Activities::Companies::New",
+            "activity_data": {
+
+            },
+            "method": "save_new_companies_companies",
+            "resulting_state": "OPEN",
+            "pre_checks": [
+              {
+                "name": "Mandatory fields",
+                "class": "Daje::Workflow::Checks::Mandatory",
+                "checks": "name"
+              }
+            ],
+            "post_checks":[],
+            "observers": []
+          },
+          {
+            "name": "save_companies_companies",
+            "activity": "Daje::Workflow::Activities::Save",
+            "activity_data": {
+              "class": "Daje::Database::Model::CompaniesCompanies"
+            },
+            "method": "save",
+            "resulting_state": "OPEN",
+            "pre_checks": [
+              {
+                "name": "Mandatory fields",
+                "class": "Daje::Workflow::Checks::Mandatory",
+                "checks": "Daje::Database::Model::CompaniesCompanies"
+              }
+            ],
+            "post_checks":[],
+            "observers": []
+          }
+        ],
+        "post_checks": [
+          {
+            "check": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "OPEN",
+      "auto": 1,
+      "state": {
+        "pre_checks": [],
+        "activities": [
+          {
+            "name": "save_companies_companies",
+            "activity": "Daje::Workflow::Activities::Save",
+            "activity_data": {
+              "class": "Daje::Database::Model::CompaniesCompanies"
+            },
+            "method": "save",
+            "resulting_state": "OPEN",
+            "pre_checks": [
+              {
+                "name": "Mandatory fields",
+                "class": "Daje::Workflow::Checks::Mandatory",
+                "checks": "Daje::Database::Model::CompaniesCompanies"
+              }
+            ],
+            "post_checks":[],
+            "observers": []
+          },
+          {
+            "name": "delete_companies_companies",
+            "activity": "Daje::Workflow::Activities::Delete",
+            "activity_data": {
+              "class": "Daje::Database::Model::CompaniesCompanies"
+            },
+            "method": "delete",
+            "resulting_state": "OPEN",
+            "pre_checks": [
+              {
+                "name": "Mandatory fields",
+                "class": "Daje::Workflow::Checks::Mandatory",
+                "checks": "companies_companies_pkey,"
+              }
+            ],
+            "post_checks":[],
+            "observers": []
+          }
+        ],
+        "post_checks": [
+          {
+            "check": ""
+          }
+        ]
+      }
+    }
+  ]
+}
+

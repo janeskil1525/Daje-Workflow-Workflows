@@ -387,11 +387,11 @@
         "activities": [
           {
             "name": "save_code",
-            "activity": "Daje::Workflow::Activities::Process::SaveCode",
+            "activity": "Daje::Workflow::Activities::Tools::Generate::SaveCode",
             "activity_data": {
-              "tags" : "perl,angular"
+              "tags" : "perl,angular,workflows"
             },
-            "method": "execute",
+            "method": "save_code",
             "resulting_state": "DONE",
             "pre_checks": [],
             "post_checks":[
