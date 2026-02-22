@@ -93,6 +93,24 @@
             "observers": []
           },
           {
+            "name": "delete_table",
+            "activity": "Daje::Workflow::Activities::Delete",
+            "activity_data": {
+              "class": "Daje::Database::Model::ToolsObjects"
+            },
+            "method": "delete",
+            "resulting_state": "OPEN",
+            "pre_checks": [
+              {
+                "name": "Mandatory fields",
+                "class": "Daje::Workflow::Checks::Mandatory",
+                "checks": "tools_objects_pkey,"
+              }
+            ],
+            "post_checks":[],
+            "observers": []
+          },
+          {
             "name": "save_object_index",
             "activity": "Daje::Workflow::Activities::Save",
             "activity_data": {
